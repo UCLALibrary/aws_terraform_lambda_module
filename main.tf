@@ -13,9 +13,12 @@ data "aws_iam_policy_document" "lambda-assume-policy-document" {
 data "template_file" "iam_policy_permissions_for_lambda" {
   template = "${file("${path.module}/templates/iam_policy.json.tpl")}"
   vars = {
-    s3_list_of_buckets = "${var.s3_iam_allowed_resources}"
-    s3_permissions = "${var.s3_iam_allowed_actions}"
-    cloudwatch_permissions = "${var.cloudwatch_iam_allowed_actions}"
+    s3_list_of_buckets = "${jsonencode(var.s3_iam_allowed_resources)}"
+    s3_permissions = "${jsonencode(var.s3_iam_allowed_actions)}"
+    cloudwatch_permissions = "${jsonencode(var.cloudwatch_iam_allowed_actions)}"
+#    s3_list_of_buckets = "${var.s3_iam_allowed_resources}"
+#    s3_permissions = "${var.s3_iam_allowed_actions}"
+#    cloudwatch_permissions = "${var.cloudwatch_iam_allowed_actions}"
   }
 }
 
