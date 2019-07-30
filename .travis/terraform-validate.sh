@@ -1,11 +1,10 @@
 #!/bin/bash
+# Module terraform validate script
 
 TERRAFORM_VERSION="0.12.5"
 TERRAFORM_URL="https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
 TERRAFORM_BIN="${HOME}/terraform/bin"
 TERRAFORM="${TERRAFORM_BIN}/terraform"
-
-AWS_ENV=("test")
 
 mkdir -p ${TERRAFORM_BIN}
 cd ${TERRAFORM_BIN}
@@ -18,9 +17,6 @@ rm terraform*.zip
 # we don't want to set this on each module.
 export AWS_DEFAULT_REGION="us-west-2"
 
-for ENV in "${AWS_ENV[@]}"
-do
-  cd "${TRAVIS_BUILD_DIR}/environments/${ENV}"
-  ${TERRAFORM} init -backend=false
-  ${TERRAFORM} validate
-done
+cd "${TRAVIS_BUILD_DIR}"
+${TERRAFORM} init -backend=false
+${TERRAFORM} validate
