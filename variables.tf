@@ -28,13 +28,7 @@ variable "app_timeout" {
   default = "600"
 }
 
-variable "bucket_name" {}
-
 variable "bucket_event" {}
-
-variable "bucket_region" {
-  default = "us-west-2"
-}
 
 variable "cloudwatch_iam_allowed_actions" {
   default = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
