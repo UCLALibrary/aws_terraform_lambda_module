@@ -35,7 +35,7 @@ variable "cloudwatch_iam_allowed_actions" {
 }
 
 variable "s3_iam_allowed_actions" {
-  default = ["*"]
+  default = ["s3:*"]
 }
 
 variable "s3_iam_allowed_resources" {
