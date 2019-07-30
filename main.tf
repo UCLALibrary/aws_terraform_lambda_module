@@ -16,9 +16,6 @@ data "template_file" "iam_policy_permissions_for_lambda" {
     s3_list_of_buckets = "${jsonencode(var.s3_iam_allowed_resources)}"
     s3_permissions = "${jsonencode(var.s3_iam_allowed_actions)}"
     cloudwatch_permissions = "${jsonencode(var.cloudwatch_iam_allowed_actions)}"
-#    s3_list_of_buckets = "${var.s3_iam_allowed_resources}"
-#    s3_permissions = "${var.s3_iam_allowed_actions}"
-#    cloudwatch_permissions = "${var.cloudwatch_iam_allowed_actions}"
   }
 }
 
@@ -69,7 +66,7 @@ resource "aws_lambda_permission" "allow_bucket" {
 
 # Create TIFF bucket notification for converter Lambda
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  bucket = "${var.trigger_s3_bucket_arn}"
+  bucket = "${var.trigger_s3_bucket_id}"
 
   lambda_function {
     lambda_function_arn = "${aws_lambda_function.app.arn}"
