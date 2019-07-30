@@ -28,7 +28,7 @@ variable "app_timeout" {
   default = "600"
 }
 
-variable "bucket_event" {}
+variable "bucket_event" { default = "" }
 
 variable "cloudwatch_iam_allowed_actions" {
   default = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
