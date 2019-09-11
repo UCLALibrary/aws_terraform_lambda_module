@@ -44,6 +44,11 @@ resource "aws_lambda_function" "app" {
   timeout           = "${var.app_timeout}"
   layers            = "${var.app_layers}"
 
+  vpc_config {
+    subnet_ids         = "${var.subnet_ids}"
+    security_group_ids = "${var.security_group_ids}"
+  }
+
   environment {
     variables = "${var.app_environment_variables}"
   }
