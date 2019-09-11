@@ -45,3 +45,8 @@ variable "s3_iam_allowed_resources" {
 variable "trigger_s3_bucket_arn" {}
 variable "trigger_s3_bucket_id" {}
 
+variable "subnet_ids" { default = [] }
+variable "security_group_ids" { default = [] }
+
+variable "eni_execute_policy_arn" { default = "arn:aws:iam::aws:policy/service-role/AWSLambdaENIManagementAccess" }
+

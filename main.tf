@@ -32,6 +32,12 @@ resource "aws_iam_role_policy" "iam_policy_for_lambda" {
   policy = "${data.template_file.iam_policy_permissions_for_lambda.rendered}"
 }
 
+# Adding VPC access to role
+resource "aws_iam_role_policy_attachment" "eni_execute_attachment" {
+  role = "${aws_iam_role.iam_for_lambda.name}"
+  policy_arn = "${var.eni_execute_policy_arn}"
+}
+
 # Create converter Lambda function
 resource "aws_lambda_function" "app" {
   filename          = "${var.app_artifact}"
@@ -43,6 +49,11 @@ resource "aws_lambda_function" "app" {
   memory_size       = "${var.app_memory_size}"
   timeout           = "${var.app_timeout}"
   layers            = "${var.app_layers}"
+
+  vpc_config {
+    subnet_ids         = "${var.subnet_ids}"
+    security_group_ids = "${var.security_group_ids}"
+  }
 
   environment {
     variables = "${var.app_environment_variables}"
