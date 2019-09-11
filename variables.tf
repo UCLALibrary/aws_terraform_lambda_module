@@ -45,6 +45,6 @@ variable "s3_iam_allowed_resources" {
 variable "trigger_s3_bucket_arn" {}
 variable "trigger_s3_bucket_id" {}
 
-variable "subnet_ids" { default = "" }
-variable "security_group_ids" { default = "" }
+variable "subnet_ids" { default = [] }
+variable "security_group_ids" { default = [] }
 
