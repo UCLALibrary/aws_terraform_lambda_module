@@ -35,7 +35,7 @@ resource "aws_iam_role_policy" "iam_policy_for_lambda" {
 # Adding VPC access to role
 resource "aws_iam_role_policy_attachment" "eni_execute_attachment" {
   role = "${aws_iam_role.iam_for_lambda.name}"
-  policy_arn = "{var.eni_execute_policy_arn}"
+  policy_arn = "${var.eni_execute_policy_arn}"
 }
 
 # Create converter Lambda function
